@@ -26,6 +26,7 @@
         <module>spring-redis</module>
         <module>spring-mongoconfig</module>
         <module>spring-model</module>
+        <module>spring-pessoa</module>
     </modules>
 
     <properties>
@@ -33,7 +34,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
-        <revision>0.0.2-SNAPSHOT</revision>
+        <revision>0.0.1-SNAPSHOT</revision>
     </properties>
 
     <dependencies>
