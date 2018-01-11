@@ -21,6 +21,7 @@
 
     <modules>
         <module>spring-config</module>
+        <module>spring-discovery</module>
         <module>spring-redis</module>
         <module>spring-mongoconfig</module>
         <module>spring-model</module>
