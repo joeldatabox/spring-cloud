@@ -21,6 +21,7 @@
 
     <modules>
         <module>spring-redis</module>
+        <module>spring-mongoconfig</module>
     </modules>
 
     <properties>
