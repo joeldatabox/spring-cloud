@@ -3,6 +3,7 @@ package br.com.springredis.service.impl;
 import br.com.springredis.service.RedisService;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
@@ -21,6 +22,7 @@ public class RedisServiceImpl implements RedisService {
 
     public RedisServiceImpl(final String basicKey, final RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
+        this.redisTemplate.setHashValueSerializer(new Jackson2JsonRedisSerializer<Object>(Object.class));
         this.basicKey = basicKey;
     }
 

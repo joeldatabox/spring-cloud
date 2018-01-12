@@ -1,6 +1,5 @@
 package br.com.springredis.config;
 
-
 import br.com.springredis.service.RedisService;
 import br.com.springredis.service.impl.RedisServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
