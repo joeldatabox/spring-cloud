@@ -1,5 +1,6 @@
 package br.com.springgateway.security.service;
 
+import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.model.User;
 
 /**
@@ -7,7 +8,7 @@ import br.com.springmodel.security.model.User;
  * @project demo
  */
 public interface CacheUserAuthenticationService {
-    void set(final String token, final User user);
+    void set(final String token, final JwtUser user);
 
-    User get(final String token);
+    JwtUser get(final String token);
 }

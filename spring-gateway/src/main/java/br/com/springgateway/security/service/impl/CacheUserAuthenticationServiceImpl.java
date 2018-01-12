@@ -1,7 +1,7 @@
 package br.com.springgateway.security.service.impl;
 
 import br.com.springgateway.security.service.CacheUserAuthenticationService;
-import br.com.springmodel.security.model.User;
+import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springredis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +21,12 @@ public class CacheUserAuthenticationServiceImpl implements CacheUserAuthenticati
     }
 
     @Override
-    public void set(final String token, final User user) {
+    public void set(final String token, final JwtUser user) {
         this.redisService.set(token, user, 30000);
     }
 
     @Override
-    public User get(final String token) {
-        return (User) redisService.get(token);
+    public JwtUser get(final String token) {
+        return (JwtUser) redisService.get(token);
     }
 }

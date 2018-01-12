@@ -24,23 +24,33 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Value("${security.jwt.controller.loginEndPoint}")
-    private String loginEndPoint;
-    @Value("${security.jwt.controller.refreshEndPoint}")
-    private String refreshTokenEndPoin;
-    @Value("${security.jwt.controller.createEndPoint}")
-    private String createEndPoint;
+    private final String loginEndPoint;
+    private final String refreshTokenEndPoin;
+    private final String createEndPoint;
+    private final UnauthorizedHandler unauthorizedHandler;
+    private final UserDetailsService userDetailsService;
+    private final AuthenticationTokenFilter authenticationTokenFilter;
 
     @Autowired
-    private UnauthorizedHandler unauthorizedHandler;
+    public WebSecurityConfig(
+            @Value("${security.jwt.controller.loginEndPoint}") final String loginEndPoint,
+            @Value("${security.jwt.controller.refreshEndPoint}") final String refreshTokenEndPoin,
+            @Value("${security.jwt.controller.createEndPoint}") final String createEndPoint,
+            final UnauthorizedHandler unauthorizedHandler,
+            final UserDetailsService userDetailsService,
+            final AuthenticationTokenFilter authenticationTokenFilter) {
+        this.loginEndPoint = loginEndPoint;
+        this.refreshTokenEndPoin = refreshTokenEndPoin;
+        this.createEndPoint = createEndPoint;
+        this.unauthorizedHandler = unauthorizedHandler;
+        this.userDetailsService = userDetailsService;
+        this.authenticationTokenFilter = authenticationTokenFilter;
+    }
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Bean
+    /*@Bean
     public AuthenticationTokenFilter authenticationTokenFilter() {
         return new AuthenticationTokenFilter();
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -85,7 +95,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         //adicionando o filtro de segurança
-        http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         //desabilitando controle de cache
         http.headers().cacheControl();

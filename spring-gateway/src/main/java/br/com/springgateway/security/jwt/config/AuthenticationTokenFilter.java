@@ -1,13 +1,15 @@
 package br.com.springgateway.security.jwt.config;
 
+import br.com.springgateway.security.service.CacheUserAuthenticationService;
+import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.jwt.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -21,16 +23,25 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 /**
  * Aplica o filtro de autenticação necessario
  */
+@Component
 public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
+    private final JwtTokenUtil tokenUtil;
+    private final String tokenHeader;
+    private final CacheUserAuthenticationService cacheAuth;
 
     @Autowired
-    private JwtTokenUtil tokenUtil;
-
-    @Value("${security.jwt.controller.tokenHeader}")
-    private String tokenHeader;
+    public AuthenticationTokenFilter(
+            final UserDetailsService userDetailsService,
+            final JwtTokenUtil tokenUtil,
+            @Value("${security.jwt.controller.tokenHeader}") final String tokenHeader,
+            final CacheUserAuthenticationService cacheAuth) {
+        this.userDetailsService = userDetailsService;
+        this.tokenUtil = tokenUtil;
+        this.tokenHeader = tokenHeader;
+        this.cacheAuth = cacheAuth;
+    }
 
     @Override
     protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain) throws ServletException, IOException {
@@ -44,13 +55,14 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
                 //buscando o usuário presente no token
-                final UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+                final JwtUser userDetails = (JwtUser) this.userDetailsService.loadUserByUsername(username);
 
                 //verificando a validade do token
                 if (tokenUtil.validateToken(authToken, userDetails)) {
                     final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    this.cacheAuth.set(authToken, userDetails);
                 }
             }
         }
