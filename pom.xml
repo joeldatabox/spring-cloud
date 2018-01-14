@@ -12,7 +12,7 @@
 
     <groupId>br.com</groupId>
     <artifactId>spring-cloud</artifactId>
-    <version>${revision}</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -34,7 +34,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Edgware.RELEASE</spring-cloud.version>
-        <revision>0.0.1-SNAPSHOT</revision>
     </properties>
 
     <dependencies>
