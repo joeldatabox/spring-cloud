@@ -24,16 +24,33 @@
             <artifactId>spring-model</artifactId>
         </dependency>
         <dependency>
+            <groupId>br.com</groupId>
+            <artifactId>spring-basic-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>br.com</groupId>
+            <artifactId>spring-mongoconfig</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>br.com</groupId>
+            <artifactId>spring-exception</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>br.com</groupId>
-            <artifactId>spring-mongoconfig</artifactId>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -55,6 +72,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.mobile</groupId>
+            <artifactId>spring-mobile-device</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
     </dependencies>
 

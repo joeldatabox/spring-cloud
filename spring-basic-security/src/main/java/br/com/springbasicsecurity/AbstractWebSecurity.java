@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
+ * Abstrai todas as configurações necessárias para utlizar o springsecurity
+ *
  * @author Joel Rodrigues Moreira on 12/01/18.
  * @project spring-cloud
  */
@@ -23,19 +25,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)*/
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final String loginEndPoint;
-    private final String refreshTokenEndPoin;
-    private final String createEndPoint;
-    private final UnauthorizedHandler unauthorizedHandler;
-    private final UserDetailsService userDetailsService;
-    private final AuthenticationTokenFilter authenticationTokenFilter;
+public abstract class AbstractWebSecurity extends WebSecurityConfigurerAdapter {
+    protected final String loginEndPoint;
+    protected final String refreshTokenEndPoin;
+    protected final String createEndPoint;
+    protected final UnauthorizedHandler unauthorizedHandler;
+    protected final UserDetailsService userDetailsService;
+    protected final AuthenticationTokenFilter authenticationTokenFilter;
 
     @Autowired
-    public WebSecurityConfig(
-            @Value("${security.jwt.controller.loginEndPoint}") final String loginEndPoint,
-            @Value("${security.jwt.controller.refreshEndPoint}") final String refreshTokenEndPoin,
-            @Value("${security.jwt.controller.createEndPoint}") final String createEndPoint,
+    public AbstractWebSecurity(
+            @Value("${springboot.security.jwt.controller.loginEndPoint}") final String loginEndPoint,
+            @Value("${springboot.security.jwt.controller.refreshEndPoint}") final String refreshTokenEndPoin,
+            @Value("${springboot.security.jwt.controller.createEndPoint}") final String createEndPoint,
             final UnauthorizedHandler unauthorizedHandler,
             final UserDetailsService userDetailsService,
             final AuthenticationTokenFilter authenticationTokenFilter) {
@@ -46,11 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
         this.authenticationTokenFilter = authenticationTokenFilter;
     }
-
-    /*@Bean
-    public AuthenticationTokenFilter authenticationTokenFilter() {
-        return new AuthenticationTokenFilter();
-    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -80,14 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // permite acesso a qualquer recurso estatico
                 .antMatchers(
                         HttpMethod.GET,
-                        "/",
-                        "/*.html",
-                        "/**/*.{png,jpg,jpeg,svg.ico}",
-                        "/**/*.{html,css,js,svg,woff,woff2}",
-                        //endpoit padrão da aplicação
-                        "/login",
-                        "/create-user",
-                        "/home/**"
+                        this.endPointPermitAllToGet()
                 ).permitAll()
                 //permitindo acesso aos endpoint de login
                 .antMatchers(loginEndPoint, refreshTokenEndPoin, createEndPoint).permitAll()
@@ -100,4 +90,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //desabilitando controle de cache
         http.headers().cacheControl();
     }
+
+    /**
+     * Informa uma lista de endpoits que são livres de segurança.
+     * Por exemplo, deve-se listar aqui os end points referente a arquivos estaticos
+     *
+     * @return um array de padrões de urls
+     */
+    protected abstract String[] endPointPermitAllToGet();
 }

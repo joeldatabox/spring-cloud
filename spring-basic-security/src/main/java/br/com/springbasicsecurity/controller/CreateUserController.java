@@ -23,11 +23,11 @@ import java.util.Map;
  */
 public class CreateUserController {
 
-    private final ApplicationEventPublisher eventPublisher;
-    private UserService service;
-    private static final String NOME = "nome";
-    private static final String EMAIL = "email";
-    private static final String PASSWD = "password";
+    protected final ApplicationEventPublisher eventPublisher;
+    protected UserService service;
+    protected static final String NOME = "nome";
+    protected static final String EMAIL = "email";
+    protected static final String PASSWD = "password";
 
     @Autowired
     public CreateUserController(final ApplicationEventPublisher eventPublisher, final UserService service) {
@@ -35,7 +35,7 @@ public class CreateUserController {
         this.service = service;
     }
 
-    @RequestMapping(value = "${security.jwt.controller.createEndPoint}", method = RequestMethod.POST)
+    @RequestMapping(value = "${springboot.security.jwt.controller.createEndPoint}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody Map<String, String> payload, HttpServletResponse response) {
         if (payload.isEmpty() || payload.size() < 3 || !payload.containsKey(NOME) || !payload.containsKey(EMAIL) || !payload.containsKey(PASSWD)) {

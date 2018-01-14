@@ -26,7 +26,7 @@ public class JwtUser implements UserDetails {
     private final Collection<? extends GrantedAuthority> authorities;
     private final boolean enabled;
     private final Date lastPasswordResetDate;
-    /*@Value("${invistate.security.jwt.issuer}")
+    /*@Value("${springboot..security.jwt.issuer}")
     private String issuer;*/
     private final User originUser;
 

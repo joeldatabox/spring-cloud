@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  * Serviço necessario por recuperar usuarios vindos do banco de dados
@@ -14,9 +15,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * @author Joel Rodrigues Moreira on 12/01/18.
  * @project spring-cloud
  */
+@Service
 public class UserDetailServiceImpl implements UserDetailsService {
+
+    private final UserRepository repository;
+
     @Autowired
-    private UserRepository repository;
+    public UserDetailServiceImpl(final UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

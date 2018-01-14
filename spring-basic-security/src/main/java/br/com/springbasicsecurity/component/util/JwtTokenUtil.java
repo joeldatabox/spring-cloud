@@ -1,4 +1,4 @@
-package br.com.springmodel.security.jwt.util;
+package br.com.springbasicsecurity.component.util;
 
 import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.service.SecretService;
@@ -20,7 +20,6 @@ import java.util.Map;
 /**
  * Created by joel on 26/03/17.
  */
-@Component
 public final class JwtTokenUtil implements Serializable {
 
     static final String CLAIM_KEY_USERNAME = "sub";
@@ -32,7 +31,7 @@ public final class JwtTokenUtil implements Serializable {
     private static final String AUDIENCE_MOBILE = "mobile";
     private static final String AUDIENCE_TABLET = "tablet";
 
-    @Value("${security.jwt.token.expiration}")
+    @Value("${springboot.security.jwt.token.expiration}")
     private long expiration;
     private final SecretService secretService;
 

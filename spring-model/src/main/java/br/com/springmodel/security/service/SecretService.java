@@ -15,7 +15,6 @@ import javax.crypto.SecretKey;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
 public class SecretService {
 
     private Map<String, String> secrets = new HashMap<>();

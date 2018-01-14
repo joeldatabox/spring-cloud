@@ -4,7 +4,7 @@ import br.com.springbasicsecurity.response.JwtTokenResponse;
 import br.com.springexception.throwables.security.SpringBootSecurityBadRequestException;
 import br.com.springexception.throwables.security.SpringBootSecurityUserNameOrPasswordInvalidException;
 import br.com.springmodel.security.jwt.JwtUser;
-import br.com.springmodel.security.jwt.util.JwtTokenUtil;
+import br.com.springbasicsecurity.component.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -26,28 +26,30 @@ import java.util.Map;
 
 /**
  * RestController responsavel por despachar novas requisições de token
+ *
  * @author Joel Rodrigues Moreira on 14/01/18.
  * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
  * @project spring-cloud
  */
 public class AuthenticationRestController {
-    @Value("${security.jwt.controller.tokenHeader}")
-    private String tokenHeader;
-    private static final String USERNAME = "username";
-    private static final String PASSWORD = "password";
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtTokenUtil jwtTokenUtil;
-    private final UserDetailsService userDetailsService;
+    protected final String tokenHeader;
+    protected static final String USERNAME = "username";
+    protected static final String PASSWORD = "password";
+
+    protected final AuthenticationManager authenticationManager;
+    protected final JwtTokenUtil jwtTokenUtil;
+    protected final UserDetailsService userDetailsService;
 
     @Autowired
-    public AuthenticationRestController(final AuthenticationManager authenticationManager, final JwtTokenUtil jwtTokenUtil, final UserDetailsService userDetailsService) {
+    public AuthenticationRestController(final @Value("${springboot.security.jwt.controller.tokenHeader}") String tokenHeader, final AuthenticationManager authenticationManager, final JwtTokenUtil jwtTokenUtil, final UserDetailsService userDetailsService) {
+        this.tokenHeader = tokenHeader;
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
     }
 
-    @RequestMapping(value = "${security.jwt.controller.loginEndPoint}", method = RequestMethod.POST)
+    @RequestMapping(value = "${springboot.security.jwt.controller.loginEndPoint}", method = RequestMethod.POST)
     public ResponseEntity createAuthenticationToken(@RequestBody Map<String, String> payload, Device device, HttpServletRequest request) {
         if (payload.isEmpty() || payload.size() < 2 || !payload.containsKey(USERNAME) || !payload.containsKey(PASSWORD)) {
             throw new SpringBootSecurityBadRequestException(User.class, null, "Informe os campos de usuário e senha")
@@ -82,7 +84,7 @@ public class AuthenticationRestController {
         }
     }
 
-    @RequestMapping(value = "${security.jwt.controller.refreshEndPoint}", method = RequestMethod.GET)
+    @RequestMapping(value = "${springboot.security.jwt.controller.refreshEndPoint}", method = RequestMethod.GET)
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(token);

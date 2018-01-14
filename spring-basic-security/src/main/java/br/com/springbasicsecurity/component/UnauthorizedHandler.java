@@ -18,9 +18,9 @@ import java.io.Serializable;
  */
 public class UnauthorizedHandler implements AuthenticationEntryPoint, Serializable {
 
-    private final String urlLogin;
+    protected final String urlLogin;
 
-    public UnauthorizedHandler(@Value("${security.jwt.controller.loginEndPoint}") final String urlLogin) {
+    public UnauthorizedHandler(@Value("${springboot.security.jwt.controller.loginEndPoint}") final String urlLogin) {
         this.urlLogin = urlLogin;
     }
 
