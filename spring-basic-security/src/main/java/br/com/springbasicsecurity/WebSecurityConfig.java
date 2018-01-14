@@ -1,12 +1,13 @@
 package br.com.springbasicsecurity;
 
+import br.com.springbasicsecurity.component.AuthenticationTokenFilter;
+import br.com.springbasicsecurity.component.UnauthorizedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,20 +19,29 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @author Joel Rodrigues Moreira on 12/01/18.
  * @project spring-cloud
  */
-@SuppressWarnings("SpringJavaAutowiringInspection")
+/*@SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)*/
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private final String loginEndPoint;
+    private final String refreshTokenEndPoin;
+    private final String createEndPoint;
     private final UnauthorizedHandler unauthorizedHandler;
     private final UserDetailsService userDetailsService;
     private final AuthenticationTokenFilter authenticationTokenFilter;
 
     @Autowired
     public WebSecurityConfig(
+            @Value("${security.jwt.controller.loginEndPoint}") final String loginEndPoint,
+            @Value("${security.jwt.controller.refreshEndPoint}") final String refreshTokenEndPoin,
+            @Value("${security.jwt.controller.createEndPoint}") final String createEndPoint,
             final UnauthorizedHandler unauthorizedHandler,
             final UserDetailsService userDetailsService,
             final AuthenticationTokenFilter authenticationTokenFilter) {
+        this.loginEndPoint = loginEndPoint;
+        this.refreshTokenEndPoin = refreshTokenEndPoin;
+        this.createEndPoint = createEndPoint;
         this.unauthorizedHandler = unauthorizedHandler;
         this.userDetailsService = userDetailsService;
         this.authenticationTokenFilter = authenticationTokenFilter;
@@ -68,19 +78,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 // permite acesso a qualquer recurso estatico
-                //.antMatchers(
-                //        HttpMethod.GET,
-                //        "/",
-                //        "/*.html",
-                //        "/**/*.{png,jpg,jpeg,svg.ico}",
-                //        "/**/*.{html,css,js,svg,woff,woff2}",
-                //        //endpoit padrão da aplicação
-                //        "/login",
-                //        "/create-user",
-                //        "/home/**"
-                //).permitAll()
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/",
+                        "/*.html",
+                        "/**/*.{png,jpg,jpeg,svg.ico}",
+                        "/**/*.{html,css,js,svg,woff,woff2}",
+                        //endpoit padrão da aplicação
+                        "/login",
+                        "/create-user",
+                        "/home/**"
+                ).permitAll()
                 //permitindo acesso aos endpoint de login
-                //.antMatchers(loginEndPoint, refreshTokenEndPoin, createEndPoint).permitAll()
+                .antMatchers(loginEndPoint, refreshTokenEndPoin, createEndPoint).permitAll()
                 //barrando qualquer outra requisição não autenticada
                 .anyRequest().authenticated();
 

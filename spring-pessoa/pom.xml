@@ -18,12 +18,10 @@
 		<dependency>
 			<groupId>br.com</groupId>
 			<artifactId>spring-model</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>br.com</groupId>
 			<artifactId>spring-mongoconfig</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

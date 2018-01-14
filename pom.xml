@@ -28,6 +28,7 @@
         <module>spring-mongoconfig</module>
         <module>spring-model</module>
         <module>spring-pessoa</module>
+        <module>spring-exception</module>
     </modules>
 
     <properties>
@@ -56,4 +57,54 @@
         </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>br.com</groupId>
+                <artifactId>spring-config</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com</groupId>
+                <artifactId>spring-discovery</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com</groupId>
+                <artifactId>spring-basic-security</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com</groupId>
+                <artifactId>spring-gateway</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com</groupId>
+                <artifactId>spring-redis</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com</groupId>
+                <artifactId>spring-mongoconfig</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com</groupId>
+                <artifactId>spring-model</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com</groupId>
+                <artifactId>spring-pessoa</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com</groupId>
+                <artifactId>spring-exception</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
 </project>

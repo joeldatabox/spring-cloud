@@ -1,10 +1,11 @@
 package br.com.springbasicsecurity.service.impl;
 
-import br.com.springbasicsecurity.exception.SecurityBadRequestException;
-import br.com.springbasicsecurity.exception.SecurityConflictException;
-import br.com.springbasicsecurity.exception.SecurityNotFoundException;
+
 import br.com.springbasicsecurity.repository.UserRepository;
 import br.com.springbasicsecurity.service.UserService;
+import br.com.springexception.throwables.security.SpringBootSecurityBadRequestException;
+import br.com.springexception.throwables.security.SpringBootSecurityConflictException;
+import br.com.springexception.throwables.security.SpringBootSecurityNotFoundException;
 import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.model.Passwd;
 import br.com.springmodel.security.model.User;
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(final String email) {
         final User user = repository.findByEmail(email);
         if (user == null) {
-            throw new SecurityNotFoundException(User.class, "email", email + " este registro não foi encontrado");
+            throw new SpringBootSecurityNotFoundException(User.class, "email", email + " este registro não foi encontrado");
         }
         return user;
     }
@@ -69,7 +70,7 @@ public class UserServiceImpl implements UserService {
     public User findById(final String id) {
         final User user = repository.findOne(id);
         if (user == null) {
-            throw new SecurityNotFoundException(User.class, "id", id + " este registro não foi encontrado");
+            throw new SpringBootSecurityNotFoundException(User.class, "id", id + " este registro não foi encontrado");
         }
         return user;
     }
@@ -96,29 +97,29 @@ public class UserServiceImpl implements UserService {
 
     private User merge(final User user) {
         if (user.getNome() == null || user.getNome().length() < 4) {
-            throw new SecurityBadRequestException(User.class, "nome", "O campo nome deve ter de 4 a 200 caracteres!");
+            throw new SpringBootSecurityBadRequestException(User.class, "nome", "O campo nome deve ter de 4 a 200 caracteres!");
         }
         if (!user.isValidEmail()) {
-            throw new SecurityBadRequestException(User.class, "email", "Informe um email válido!");
+            throw new SpringBootSecurityBadRequestException(User.class, "email", "Informe um email válido!");
         }
         if (user.getId() == null) {
             //validando se já existe esse usuário no sistema
             try {
                 if (findByEmail(user.getEmail()) != null) {
-                    throw new SecurityConflictException(User.class, "email", "Email já cadastrado!");
+                    throw new SpringBootSecurityConflictException(User.class, "email", "Email já cadastrado!");
                 }
-            } catch (SecurityNotFoundException ex) {
+            } catch (SpringBootSecurityNotFoundException ex) {
             }
             //validando se preencheu a senha corretamente
             if (!user.isValidPasswd()) {
-                throw new SecurityBadRequestException(User.class, "passwd", "Informe uma senha válida!");
+                throw new SpringBootSecurityBadRequestException(User.class, "passwd", "Informe uma senha válida!");
             }
             return repository.save(user);
         } else {
             final User self = findById(user.getId());
 
             if (!self.getEmail().equals(user.getEmail())) {
-                throw new SecurityBadRequestException(User.class, "email", "O email não pode ser modificado!").setStatus(HttpStatus.NOT_ACCEPTABLE);
+                throw new SpringBootSecurityBadRequestException(User.class, "email", "O email não pode ser modificado!").setStatus(HttpStatus.NOT_ACCEPTABLE);
             }
 
             //garantindo que a senha não irá ser modificada

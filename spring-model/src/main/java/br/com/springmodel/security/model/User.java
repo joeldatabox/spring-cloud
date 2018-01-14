@@ -1,7 +1,7 @@
 package br.com.springmodel.security.model;
 
+import br.com.springexception.throwables.security.SpringBootSecurityBadRequestException;
 import br.com.springmodel.security.model.enumeration.Authorities;
-import br.com.springmodel.security.model.exception.SecurityBadRequestException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -91,7 +91,7 @@ public class User implements Serializable {
     @JsonProperty
     public User setPasswd(final String passwd) {
         if (passwd == null || passwd.trim().isEmpty()) {
-            throw new SecurityBadRequestException(User.class, "passwd", "Informe uma senha valida!");
+            throw new SpringBootSecurityBadRequestException(User.class, "passwd", "Informe uma senha valida!");
         }
         this.passwd = new BCryptPasswordEncoder(SALT).encode(passwd);
         return this;
@@ -103,7 +103,7 @@ public class User implements Serializable {
 
     public void setPasswd(final Passwd passwd) {
         if (!checkPasswd(passwd.getActualPasswd())) {
-            throw new SecurityBadRequestException(User.class, "passwd", "A senha atual informada é invalida!").setStatus(HttpStatus.NOT_ACCEPTABLE);
+            throw new SpringBootSecurityBadRequestException(User.class, "passwd", "A senha atual informada é invalida!").setStatus(HttpStatus.NOT_ACCEPTABLE);
         }
         this.passwd = new BCryptPasswordEncoder(SALT).encode(passwd.getNewPasswd());
     }
