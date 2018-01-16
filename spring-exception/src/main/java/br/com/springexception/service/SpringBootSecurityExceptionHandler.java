@@ -1,4 +1,4 @@
-package br.com.springexception.handlers;
+package br.com.springexception.service;
 
 import br.com.springexception.throwables.security.SpringBootSecurityUnauthorizedException;
 import br.com.springexception.throwables.security.SpringBootSecurityUserNameOrPasswordInvalidException;

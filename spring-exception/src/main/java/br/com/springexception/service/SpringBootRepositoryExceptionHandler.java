@@ -1,4 +1,4 @@
-package br.com.springexception.handlers;
+package br.com.springexception.service;
 
 import br.com.springexception.throwables.SpringBootException;
 import br.com.springexception.throwables.repository.SpringBootRepositoryException;

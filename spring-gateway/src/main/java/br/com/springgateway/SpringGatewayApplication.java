@@ -19,7 +19,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
         "br.com.springbasicsecurity.service",
         "br.com.springredis.service",
         "br.com.springgateway.security",
-        "br.com.springbasicsecurity.service"
+        "br.com.springbasicsecurity.service",
+        "br.com.springexception.service"
 })
 @EnableZuulProxy
 @EnableEurekaClient

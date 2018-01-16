@@ -1,10 +1,10 @@
 package br.com.springbasicsecurity.controller;
 
+import br.com.springbasicsecurity.component.util.JwtTokenUtil;
 import br.com.springbasicsecurity.response.JwtTokenResponse;
 import br.com.springexception.throwables.security.SpringBootSecurityBadRequestException;
 import br.com.springexception.throwables.security.SpringBootSecurityUserNameOrPasswordInvalidException;
 import br.com.springmodel.security.jwt.JwtUser;
-import br.com.springbasicsecurity.component.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,9 +74,11 @@ public class AuthenticationRestController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             //se chegou até aqui é sinal que o usuário e senha é valido
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(payload.get(USERNAME));
+            final JwtUser userDetails = (JwtUser) userDetailsService.loadUserByUsername(payload.get(USERNAME));
             //gerando o token de autorização
             JwtTokenResponse token = new JwtTokenResponse(jwtTokenUtil.generateToken(userDetails, device));
+            //notificando que o token foi gerado
+            this.afterGeneratedToken(userDetails, token);
             return ResponseEntity.ok(token);
         } catch (BadCredentialsException ex) {
             throw new SpringBootSecurityUserNameOrPasswordInvalidException();
@@ -95,5 +96,14 @@ public class AuthenticationRestController {
             return ResponseEntity.ok(new JwtTokenResponse(refreshedToken));
         }
         throw new SpringBootSecurityBadRequestException(null, null, "Token invalido. Faça login novamente");
+    }
+
+    /**
+     * O Metodo é notificado toda vez que um token é gerado para um determinado usuário
+     *
+     * @param user  -> usuário do token gerado
+     * @param token -> token gerado
+     */
+    protected void afterGeneratedToken(final JwtUser user, final JwtTokenResponse token) {
     }
 }

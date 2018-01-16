@@ -1,4 +1,4 @@
-package br.com.springexception.handlers;
+package br.com.springexception.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;

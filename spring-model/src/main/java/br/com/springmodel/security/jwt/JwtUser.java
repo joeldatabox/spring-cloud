@@ -41,6 +41,17 @@ public class JwtUser implements UserDetails {
         this.originUser = user;
     }
 
+    public JwtUser(final UserBuilder userBuilder) {
+        this.id = userBuilder.id;
+        this.name = userBuilder.name;
+        this.password = userBuilder.password;
+        this.email = userBuilder.email;
+        this.authorities = userBuilder.authorities;
+        this.enabled = userBuilder.enabled;
+        this.lastPasswordResetDate = userBuilder.lastPasswordResetDate;
+        this.originUser = userBuilder.originUser;
+    }
+
     @JsonIgnore
     public User getOriginUser() {
         return originUser;
@@ -103,5 +114,63 @@ public class JwtUser implements UserDetails {
         return authorities.stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName().name()))
                 .collect(Collectors.toList());
+    }
+
+    public static class UserBuilder {
+        private String id;
+        private String name;
+
+        private String password;
+        private String email;
+        private Collection<? extends GrantedAuthority> authorities;
+        private boolean enabled;
+        private Date lastPasswordResetDate;
+        /*@Value("${springboot..security.jwt.issuer}")
+        private String issuer;*/
+        private User originUser;
+
+        public UserBuilder setId(final String id) {
+            this.id = id;
+            return this;
+        }
+
+        public UserBuilder setName(final String name) {
+            this.name = name;
+            return this;
+        }
+
+        public UserBuilder setPassword(final String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder setEmail(final String email) {
+            this.email = email;
+            return this;
+        }
+
+        public UserBuilder setAuthorities(final Collection<? extends GrantedAuthority> authorities) {
+            this.authorities = authorities;
+            return this;
+        }
+
+        public UserBuilder setEnabled(final boolean enabled) {
+            this.enabled = enabled;
+            return this;
+        }
+
+        public UserBuilder setLastPasswordResetDate(final Date lastPasswordResetDate) {
+            this.lastPasswordResetDate = lastPasswordResetDate;
+            return this;
+        }
+
+        public UserBuilder setOriginUser(final User originUser) {
+            this.originUser = originUser;
+            return this;
+        }
+
+        public JwtUser build() {
+            return new JwtUser(this);
+        }
     }
 }
