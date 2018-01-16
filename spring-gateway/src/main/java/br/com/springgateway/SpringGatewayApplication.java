@@ -9,9 +9,18 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@SpringBootApplication(scanBasePackages = "br.com")
-//repositorios
-@EnableMongoRepositories(basePackages={"br.com.springbasicsecurity.repository"})
+@SpringBootApplication
+//Packages onde existem entidades
+@EntityScan(basePackages = {"br.com.springmodel"})
+//Packages onde existem repositórios
+@EnableMongoRepositories(basePackages = {"br.com.springbasicsecurity.repository"})
+//Packages onde existem componentes, serviços e configurações
+@ComponentScan(basePackages = {
+        "br.com.springbasicsecurity.service",
+        "br.com.springredis.service",
+        "br.com.springgateway.security",
+        "br.com.springbasicsecurity.service"
+})
 @EnableZuulProxy
 @EnableEurekaClient
 @EnableFeignClients

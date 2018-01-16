@@ -1,4 +1,4 @@
-package br.com.springgateway.security.config;
+package br.com.springbasicsecurity.service.config;
 
 import br.com.springbasicsecurity.component.AuthenticationTokenFilter;
 import br.com.springbasicsecurity.component.UnauthorizedHandler;
@@ -12,12 +12,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * @author Joel Rodrigues Moreira on 14/01/18.
- * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
+ * @author Joel Rodrigues Moreira on 16/01/18.
  * @project spring-cloud
  */
 @Configuration
-public class SecurityConfig {
+public class WebSecurityConfiguration {
 
     @Bean
     @Autowired

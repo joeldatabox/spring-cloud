@@ -5,7 +5,9 @@ import br.com.springmongoconfig.converters.Decimal128ToBigDecimalConverter;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.support.MongoRepositoryFactory;
@@ -22,6 +24,7 @@ import static java.util.Collections.singletonList;
  * @author Joel Rodrigues Moreira on 10/01/18.
  * @project demo
  */
+@Configuration
 public class DemoMongoConfig extends AbstractMongoConfiguration {
     private final CustomConversions converters;
 
@@ -31,11 +34,11 @@ public class DemoMongoConfig extends AbstractMongoConfiguration {
     protected final String userName;
     protected final String password;
 
-    public DemoMongoConfig(final String dataBaseName,
-                           final String hostDataBase,
-                           final String portDataBase,
-                           final String userName,
-                           final String password) {
+    public DemoMongoConfig(@Value("${spring.data.mongodb.database}") final String dataBaseName,
+                           @Value("${spring.data.mongodb.host}") final String hostDataBase,
+                           @Value("${spring.data.mongodb.port}") final String portDataBase,
+                           @Value("${spring.data.mongodb.username}") final String userName,
+                           @Value("${spring.data.mongodb.password}") final String password) {
 
         this.dataBaseName = dataBaseName;
         this.hostDataBase = hostDataBase;

@@ -11,7 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * Created by joel on 26/03/17.
+ * @author Joel Rodrigues Moreira on 14/01/18.
+ * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
+ * @project spring-cloud
  */
 @SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration

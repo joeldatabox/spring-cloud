@@ -1,4 +1,4 @@
-package br.com.springredis.config;
+package br.com.springredis.service.config;
 
 import br.com.springredis.service.RedisService;
 import br.com.springredis.service.impl.RedisServiceImpl;
@@ -22,14 +22,18 @@ public class RedisConfig {
     private final String host;
     private final int port;
 
-    public RedisConfig(@Value("${spring.redis.host:localhost}") final String host, @Value("${spring.redis.port:6379}") final int port) {
+    public RedisConfig(
+            @Value("${springboot.redis.host:localhost}") final String host,
+            @Value("${springboot.redis.port:6379}") final int port) {
         this.host = host;
         this.port = port;
     }
 
     @Bean
-    public RedisService createService(@Autowired RedisTemplate redisTemplate) {
-        return new RedisServiceImpl("cache", redisTemplate);
+    public RedisService createService(
+            @Value("${springboot.redis.prefixHash:cache}") final String prefixHash,
+            @Autowired RedisTemplate redisTemplate) {
+        return new RedisServiceImpl(prefixHash, redisTemplate);
     }
 
     @Bean
