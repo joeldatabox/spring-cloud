@@ -1,6 +1,6 @@
 package br.com.springbasicsecurity.service.impl;
 
-import br.com.springbasicsecurity.repository.UserRepository;
+import br.com.springbasicsecurity.infra.repository.UserRepository;
 import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.model.User;
 import org.springframework.beans.factory.annotation.Autowired;

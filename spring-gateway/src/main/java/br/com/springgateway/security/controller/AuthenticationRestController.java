@@ -1,6 +1,6 @@
 package br.com.springgateway.security.controller;
 
-import br.com.springbasicsecurity.component.util.JwtTokenUtil;
+import br.com.springbasicsecurity.infra.component.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @project spring-cloud
  */
 @RestController
-public class AuthenticationRestController extends br.com.springbasicsecurity.controller.AuthenticationRestController {
+public class AuthenticationRestController extends br.com.springbasicsecurity.infra.controller.AuthenticationRestController {
 
     @Autowired
     public AuthenticationRestController(

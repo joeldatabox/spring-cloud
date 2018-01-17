@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 //Packages onde existem entidades
 @EntityScan(basePackages = {"br.com.springmodel"})
 //Packages onde existem repositórios
-@EnableMongoRepositories(basePackages = {"br.com.springbasicsecurity.repository"})
+@EnableMongoRepositories(basePackages = {"br.com.springbasicsecurity.infra.repository"})
 //Packages onde existem componentes, serviços e configurações
 @ComponentScan(basePackages = {
         "br.com.springgateway.filter",

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @project spring-cloud
  */
 @RestController
-public class UserManagerController extends br.com.springbasicsecurity.controller.UserManagerController {
+public class UserManagerController extends br.com.springbasicsecurity.infra.controller.UserManagerController {
 
     @Autowired
     public UserManagerController(UserService service) {

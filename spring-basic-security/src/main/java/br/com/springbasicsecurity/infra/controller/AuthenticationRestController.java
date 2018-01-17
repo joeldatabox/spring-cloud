@@ -1,7 +1,7 @@
-package br.com.springbasicsecurity.controller;
+package br.com.springbasicsecurity.infra.controller;
 
-import br.com.springbasicsecurity.component.util.JwtTokenUtil;
-import br.com.springbasicsecurity.response.JwtTokenResponse;
+import br.com.springbasicsecurity.infra.component.util.JwtTokenUtil;
+import br.com.springbasicsecurity.infra.response.JwtTokenResponse;
 import br.com.springexception.throwables.security.SpringBootSecurityBadRequestException;
 import br.com.springexception.throwables.security.SpringBootSecurityUserNameOrPasswordInvalidException;
 import br.com.springmodel.security.jwt.JwtUser;

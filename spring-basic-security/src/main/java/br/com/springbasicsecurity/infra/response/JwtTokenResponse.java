@@ -1,4 +1,4 @@
-package br.com.springbasicsecurity.response;
+package br.com.springbasicsecurity.infra.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

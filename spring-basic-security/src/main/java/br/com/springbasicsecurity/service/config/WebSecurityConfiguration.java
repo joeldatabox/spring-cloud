@@ -1,8 +1,8 @@
 package br.com.springbasicsecurity.service.config;
 
-import br.com.springbasicsecurity.component.AuthenticationTokenFilter;
-import br.com.springbasicsecurity.component.UnauthorizedHandler;
-import br.com.springbasicsecurity.component.util.JwtTokenUtil;
+import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilter;
+import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;
+import br.com.springbasicsecurity.infra.component.util.JwtTokenUtil;
 import br.com.springbasicsecurity.service.CacheUserAuthenticationService;
 import br.com.springmodel.security.service.SecretService;
 import org.springframework.beans.factory.annotation.Autowired;

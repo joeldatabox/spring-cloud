@@ -1,4 +1,4 @@
-package br.com.springbasicsecurity.controller;
+package br.com.springbasicsecurity.infra.controller;
 
 import br.com.springbasicsecurity.service.UserService;
 import br.com.springmodel.security.model.Passwd;

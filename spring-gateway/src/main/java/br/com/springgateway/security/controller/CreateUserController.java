@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @project spring-cloud
  */
 @RestController
-public class CreateUserController extends br.com.springbasicsecurity.controller.CreateUserController {
+public class CreateUserController extends br.com.springbasicsecurity.infra.controller.CreateUserController {
     @Autowired
     public CreateUserController(final ApplicationEventPublisher eventPublisher, final UserService service) {
         super(eventPublisher, service);

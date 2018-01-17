@@ -1,4 +1,4 @@
-package br.com.springbasicsecurity.component.util;
+package br.com.springbasicsecurity.infra.component.util;
 
 import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.service.SecretService;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.Instant;

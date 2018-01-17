@@ -1,7 +1,7 @@
 package br.com.springbasicsecurity.service.impl;
 
 
-import br.com.springbasicsecurity.repository.UserRepository;
+import br.com.springbasicsecurity.infra.repository.UserRepository;
 import br.com.springbasicsecurity.service.UserService;
 import br.com.springexception.throwables.security.SpringBootSecurityBadRequestException;
 import br.com.springexception.throwables.security.SpringBootSecurityConflictException;

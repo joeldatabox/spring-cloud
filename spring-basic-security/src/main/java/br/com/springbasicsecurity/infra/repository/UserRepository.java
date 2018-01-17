@@ -1,4 +1,4 @@
-package br.com.springbasicsecurity.repository;
+package br.com.springbasicsecurity.infra.repository;
 
 import br.com.springmodel.security.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;

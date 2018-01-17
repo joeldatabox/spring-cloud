@@ -1,4 +1,4 @@
-package br.com.springbasicsecurity.component;
+package br.com.springbasicsecurity.infra.component;
 
 import br.com.springexception.throwables.security.SpringBootSecurityUnauthorizedException;
 import org.springframework.beans.factory.annotation.Value;

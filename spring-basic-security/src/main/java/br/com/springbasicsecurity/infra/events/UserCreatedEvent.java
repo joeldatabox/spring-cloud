@@ -1,4 +1,4 @@
-package br.com.springbasicsecurity.events;
+package br.com.springbasicsecurity.infra.events;
 import br.com.springmodel.security.model.User;
 import org.springframework.context.ApplicationEvent;
 

@@ -1,8 +1,8 @@
-package br.com.springbasicsecurity.component;
+package br.com.springbasicsecurity.infra.component;
 
 import br.com.springbasicsecurity.service.CacheUserAuthenticationService;
 import br.com.springmodel.security.jwt.JwtUser;
-import br.com.springbasicsecurity.component.util.JwtTokenUtil;
+import br.com.springbasicsecurity.infra.component.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

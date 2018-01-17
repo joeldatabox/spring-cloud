@@ -1,7 +1,7 @@
 package br.com.springbasicsecurity;
 
-import br.com.springbasicsecurity.component.AuthenticationTokenFilter;
-import br.com.springbasicsecurity.component.UnauthorizedHandler;
+import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilter;
+import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
