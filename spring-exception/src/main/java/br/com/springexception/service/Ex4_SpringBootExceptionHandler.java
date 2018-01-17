@@ -15,16 +15,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by joel on 14/04/17.
+ * A classe começa com o nome Ex4_ por conta de precedencia de exceptions do Spring
+ *
+ * @author Joel Rodrigues Moreira on 14/01/18.
+ * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
+ * @project spring-cloud
  */
 @ControllerAdvice
 @RestController
-public class SpringBootExceptionHandler {
+public class Ex4_SpringBootExceptionHandler {
 
     private final ErrorMessageBuilder errorMessageBuilder;
 
     @Autowired
-    public SpringBootExceptionHandler(final ErrorMessageBuilder errorMessageBuilder) {
+    public Ex4_SpringBootExceptionHandler(final ErrorMessageBuilder errorMessageBuilder) {
         this.errorMessageBuilder = errorMessageBuilder;
     }
 

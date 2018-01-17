@@ -15,16 +15,19 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import javax.validation.ConstraintViolationException;
 
 /**
- * Created by joel on 14/04/17.
+ * A classe começa com o nome Ex3_ por conta de precedencia de exceptions do Spring
+ * @author Joel Rodrigues Moreira on 14/01/18.
+ * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
+ * @project spring-cloud
  */
 @ControllerAdvice
 @RestController
-public class SpringBootCloudExceptionHandler {
+public class Ex3_SpringBootCloudExceptionHandler {
 
     private final ErrorMessageBuilder errorMessageBuilder;
 
     @Autowired
-    public SpringBootCloudExceptionHandler(final ErrorMessageBuilder errorMessageBuilder) {
+    public Ex3_SpringBootCloudExceptionHandler(final ErrorMessageBuilder errorMessageBuilder) {
         this.errorMessageBuilder = errorMessageBuilder;
     }
 

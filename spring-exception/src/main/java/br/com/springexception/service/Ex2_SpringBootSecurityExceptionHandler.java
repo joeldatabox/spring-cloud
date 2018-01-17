@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by joel on 14/04/17.
- */
-@ControllerAdvice
+ * A classe começa com o nome Ex2_ por conta de precedencia de exceptions do Spring
+ * @author Joel Rodrigues Moreira on 14/01/18.
+ * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
+ * @project spring-cloud
+ */@ControllerAdvice
 @RestController
-public class SpringBootSecurityExceptionHandler {
+public class Ex2_SpringBootSecurityExceptionHandler {
 
     private final ErrorMessageBuilder errorMessageBuilder;
 
     @Autowired
-    public SpringBootSecurityExceptionHandler(final ErrorMessageBuilder errorMessageBuilder) {
+    public Ex2_SpringBootSecurityExceptionHandler(final ErrorMessageBuilder errorMessageBuilder) {
         this.errorMessageBuilder = errorMessageBuilder;
     }
 
