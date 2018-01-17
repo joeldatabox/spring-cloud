@@ -1,6 +1,6 @@
-package br.com.springbasicsecurity.service.impl;
+package br.com.springbasicsecurity.infra.service.impl;
 
-import br.com.springbasicsecurity.service.CacheUserAuthenticationService;
+import br.com.springbasicsecurity.infra.service.CacheUserAuthenticationService;
 import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.model.User;
 import br.com.springredis.service.RedisService;
@@ -17,7 +17,6 @@ import java.util.Map;
  * @author Joel Rodrigues Moreira on 09/01/18.
  * @project demo
  */
-@Service
 public class CacheUserAuthenticationServiceImpl implements CacheUserAuthenticationService {
 
     private final RedisService redisService;

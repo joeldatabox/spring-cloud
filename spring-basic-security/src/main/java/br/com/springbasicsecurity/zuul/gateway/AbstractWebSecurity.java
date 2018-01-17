@@ -1,4 +1,4 @@
-package br.com.springbasicsecurity;
+package br.com.springbasicsecurity.zuul.gateway;
 
 import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilter;
 import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;

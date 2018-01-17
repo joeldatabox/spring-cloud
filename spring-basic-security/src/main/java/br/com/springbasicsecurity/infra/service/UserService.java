@@ -1,4 +1,4 @@
-package br.com.springbasicsecurity.service;
+package br.com.springbasicsecurity.infra.service;
 
 import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.model.Passwd;

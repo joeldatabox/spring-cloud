@@ -1,8 +1,8 @@
-package br.com.springbasicsecurity.service.impl;
+package br.com.springbasicsecurity.infra.service.impl;
 
 
 import br.com.springbasicsecurity.infra.repository.UserRepository;
-import br.com.springbasicsecurity.service.UserService;
+import br.com.springbasicsecurity.infra.service.UserService;
 import br.com.springexception.throwables.security.SpringBootSecurityBadRequestException;
 import br.com.springexception.throwables.security.SpringBootSecurityConflictException;
 import br.com.springexception.throwables.security.SpringBootSecurityNotFoundException;
@@ -23,7 +23,6 @@ import java.util.Map;
  * @author Joel Rodrigues Moreira on 12/01/18.
  * @project spring-cloud
  */
-@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;

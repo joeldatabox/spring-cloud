@@ -1,4 +1,4 @@
-package br.com.springbasicsecurity.service.impl;
+package br.com.springbasicsecurity.infra.service.impl;
 
 import br.com.springbasicsecurity.infra.repository.UserRepository;
 import br.com.springmodel.security.jwt.JwtUser;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
  * @author Joel Rodrigues Moreira on 12/01/18.
  * @project spring-cloud
  */
-@Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
     private final UserRepository repository;

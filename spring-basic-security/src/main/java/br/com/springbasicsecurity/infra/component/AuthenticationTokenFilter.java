@@ -1,6 +1,6 @@
 package br.com.springbasicsecurity.infra.component;
 
-import br.com.springbasicsecurity.service.CacheUserAuthenticationService;
+import br.com.springbasicsecurity.infra.service.CacheUserAuthenticationService;
 import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springbasicsecurity.infra.component.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;

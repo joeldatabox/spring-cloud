@@ -2,7 +2,7 @@ package br.com.springbasicsecurity.infra.controller;
 
 import br.com.springbasicsecurity.infra.events.UserCreatedEvent;
 
-import br.com.springbasicsecurity.service.UserService;
+import br.com.springbasicsecurity.infra.service.UserService;
 import br.com.springexception.throwables.security.SpringBootSecurityBadRequestException;
 import br.com.springmodel.security.model.User;
 import org.springframework.beans.factory.annotation.Autowired;

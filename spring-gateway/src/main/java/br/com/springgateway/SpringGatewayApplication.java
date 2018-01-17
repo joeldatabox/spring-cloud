@@ -17,10 +17,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 //Packages onde existem componentes, serviços e configurações
 @ComponentScan(basePackages = {
         "br.com.springgateway.filter",
-        "br.com.springbasicsecurity.service",
+        "br.com.springbasicsecurity.zuul.gateway.service",
         "br.com.springredis.service",
         "br.com.springgateway.security",
-        "br.com.springbasicsecurity.service",
         "br.com.springexception.service"
 })
 @EnableZuulProxy

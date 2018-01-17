@@ -1,6 +1,6 @@
 package br.com.springgateway.security.config;
 
-import br.com.springbasicsecurity.AbstractWebSecurity;
+import br.com.springbasicsecurity.zuul.gateway.AbstractWebSecurity;
 import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilter;
 import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,16 @@
-package br.com.springbasicsecurity.service.config;
+package br.com.springbasicsecurity.zuul.gateway.service.config;
 
 import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilter;
 import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;
 import br.com.springbasicsecurity.infra.component.util.JwtTokenUtil;
-import br.com.springbasicsecurity.service.CacheUserAuthenticationService;
+import br.com.springbasicsecurity.infra.repository.UserRepository;
+import br.com.springbasicsecurity.infra.service.CacheUserAuthenticationService;
+import br.com.springbasicsecurity.infra.service.UserService;
+import br.com.springbasicsecurity.infra.service.impl.CacheUserAuthenticationServiceImpl;
+import br.com.springbasicsecurity.infra.service.impl.UserDetailServiceImpl;
+import br.com.springbasicsecurity.infra.service.impl.UserServiceImpl;
 import br.com.springmodel.security.service.SecretService;
+import br.com.springredis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -42,5 +48,23 @@ public class WebSecurityConfiguration {
     @Bean
     public SecretService createSecretService() {
         return new SecretService();
+    }
+
+    @Bean
+    @Autowired
+    public UserDetailsService createUserDetailsService(final UserRepository repository) {
+        return new UserDetailServiceImpl(repository);
+    }
+
+    @Bean
+    @Autowired
+    public CacheUserAuthenticationService createCacheUserAuthenticationService(final RedisService redisService) {
+        return new CacheUserAuthenticationServiceImpl(redisService);
+    }
+
+    @Bean
+    @Autowired
+    public UserService createUserService(final UserRepository repository) {
+        return new UserServiceImpl(repository);
     }
 }

@@ -1,7 +1,7 @@
 package br.com.springgateway.security.controller;
 
 
-import br.com.springbasicsecurity.service.UserService;
+import br.com.springbasicsecurity.infra.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
