@@ -6,7 +6,9 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by joel on 26/03/17.
+ * @author Joel Rodrigues Moreira on 14/01/18.
+ * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
+ * @project spring-cloud
  */
 @RestController
 public class CreateUserController extends br.com.springbasicsecurity.controller.CreateUserController {

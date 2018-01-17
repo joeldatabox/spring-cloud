@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = {"br.com.springbasicsecurity.repository"})
 //Packages onde existem componentes, serviços e configurações
 @ComponentScan(basePackages = {
+        "br.com.springgateway.filter",
         "br.com.springbasicsecurity.service",
         "br.com.springredis.service",
         "br.com.springgateway.security",
@@ -26,7 +27,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableEurekaClient
 @EnableFeignClients
 public class SpringGatewayApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SpringGatewayApplication.class, args);
     }
