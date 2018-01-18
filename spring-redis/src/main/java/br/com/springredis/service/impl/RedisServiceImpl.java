@@ -4,7 +4,6 @@ import br.com.springredis.service.RedisService;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
@@ -55,7 +54,7 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public void set(final String key, final Object value, final long time) {
         this.hashOps.put(this.getBasicKey(), key, value);
-        this.hashOps.getOperations().expire(key, time, TimeUnit.MILLISECONDS);
+        this.redisTemplate.expire(key, time, TimeUnit.MILLISECONDS);
     }
 
     @Override

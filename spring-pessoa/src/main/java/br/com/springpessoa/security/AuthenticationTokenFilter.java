@@ -2,11 +2,7 @@ package br.com.springpessoa.security;
 
 import br.com.springbasicsecurity.infra.component.util.JwtTokenUtil;
 import br.com.springbasicsecurity.infra.service.CacheUserAuthenticationService;
-import br.com.springbasicsecurity.infra.service.impl.CacheUserAuthenticationServiceImpl;
-import br.com.springredis.service.RedisService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,7 +50,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
                 final UserDetails userDetails = this.cacheAuth.get(authToken);
 
                 //verificando a validade do token
-                if (tokenUtil.validateToken(authToken, userDetails)) {
+                if (userDetails != null) {
                     final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);

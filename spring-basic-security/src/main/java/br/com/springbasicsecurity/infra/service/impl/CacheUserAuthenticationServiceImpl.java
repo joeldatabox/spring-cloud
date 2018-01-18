@@ -2,11 +2,9 @@ package br.com.springbasicsecurity.infra.service.impl;
 
 import br.com.springbasicsecurity.infra.service.CacheUserAuthenticationService;
 import br.com.springmodel.security.jwt.JwtUser;
-import br.com.springmodel.security.model.User;
 import br.com.springredis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Date;
@@ -36,20 +34,23 @@ public class CacheUserAuthenticationServiceImpl implements CacheUserAuthenticati
         mapJwtUser.put("lastPasswordResetDate", user.getLastPasswordResetDate());
         mapJwtUser.put("originUser", user.getOriginUser());
         mapJwtUser.put("username", user.getUsername());
-        this.redisService.set(token, mapJwtUser, 30000);
+        this.redisService.set(token, mapJwtUser, 3600000);
     }
 
     @Override
     public JwtUser get(final String token) {
         final Map<String, Object> mapJwtUser = (Map<String, Object>) redisService.get(token);
-        return new JwtUser.UserBuilder()
-                .setId((String) mapJwtUser.get("id"))
-                .setEmail((String) mapJwtUser.get("email"))
-                .setPassword((String) mapJwtUser.get("password"))
-                .setAuthorities((Collection<? extends GrantedAuthority>) mapJwtUser.get("authorities"))
-                .setLastPasswordResetDate((Date) mapJwtUser.get("lastPasswordResetDate"))
-                .setOriginUser((User) mapJwtUser.get("originUser"))
-                .setName((String) mapJwtUser.get("username"))
-                .build();
+        if (mapJwtUser != null) {
+            return new JwtUser.UserBuilder()
+                    .setId((String) mapJwtUser.get("id"))
+                    .setEmail((String) mapJwtUser.get("email"))
+                    .setPassword((String) mapJwtUser.get("password"))
+                    .setAuthorities((Collection<? extends GrantedAuthority>) mapJwtUser.get("authorities"))
+                    .setLastPasswordResetDate(mapJwtUser.get("lastPasswordResetDate") != null ? new Date(Long.valueOf(mapJwtUser.get("lastPasswordResetDate").toString())) : null)
+                    //.setOriginUser((User) mapJwtUser.get("originUser"))
+                    .setName((String) mapJwtUser.get("username"))
+                    .build();
+        }
+        return null;
     }
 }
