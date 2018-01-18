@@ -1,4 +1,4 @@
-package br.com.springmongoconfig.converters;
+package br.com.springmongoconfig.service.converters;
 
 
 import org.bson.types.Decimal128;

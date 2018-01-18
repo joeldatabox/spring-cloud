@@ -1,4 +1,4 @@
-package br.com.springmongoconfig.infra;
+package br.com.springmongoconfig.service.infra;
 
 import br.com.springexception.throwables.SpringBootBadRequestException;
 import com.mongodb.BasicDBObject;

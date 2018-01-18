@@ -16,11 +16,16 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = {"br.com.springbasicsecurity.infra.repository"})
 //Packages onde existem componentes, serviços e configurações
 @ComponentScan(basePackages = {
-        "br.com.springgateway.filter",
+        //Injeções internas do projeto
+        "br.com.springgateway",
+        //Configurações de segurança para o gateway
         "br.com.springbasicsecurity.zuul.gateway.service",
+        //Configurações do serviço de cache
         "br.com.springredis.service",
-        "br.com.springgateway.security",
-        "br.com.springexception.service"
+        //Configurações de exceptions
+        "br.com.springexception.service",
+        //Configurações do  serviço do mongo
+        "br.com.springmongoconfig.service"
 })
 @EnableZuulProxy
 @EnableEurekaClient
