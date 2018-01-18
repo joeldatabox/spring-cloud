@@ -1,6 +1,6 @@
 package br.com.springbasicsecurity.zuul.gateway;
 
-import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilter;
+import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilterGateway;
 import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,28 +25,28 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)*/
-public abstract class AbstractWebSecurity extends WebSecurityConfigurerAdapter {
+public abstract class AbstractWebSecurityGateway extends WebSecurityConfigurerAdapter {
     protected final String loginEndPoint;
     protected final String refreshTokenEndPoin;
     protected final String createEndPoint;
     protected final UnauthorizedHandler unauthorizedHandler;
     protected final UserDetailsService userDetailsService;
-    protected final AuthenticationTokenFilter authenticationTokenFilter;
+    protected final AuthenticationTokenFilterGateway authenticationTokenFilterGateway;
 
     @Autowired
-    public AbstractWebSecurity(
+    public AbstractWebSecurityGateway(
             @Value("${springboot.security.jwt.controller.loginEndPoint}") final String loginEndPoint,
             @Value("${springboot.security.jwt.controller.refreshEndPoint}") final String refreshTokenEndPoin,
             @Value("${springboot.security.jwt.controller.createEndPoint}") final String createEndPoint,
             final UnauthorizedHandler unauthorizedHandler,
             final UserDetailsService userDetailsService,
-            final AuthenticationTokenFilter authenticationTokenFilter) {
+            final AuthenticationTokenFilterGateway authenticationTokenFilterGateway) {
         this.loginEndPoint = loginEndPoint;
         this.refreshTokenEndPoin = refreshTokenEndPoin;
         this.createEndPoint = createEndPoint;
         this.unauthorizedHandler = unauthorizedHandler;
         this.userDetailsService = userDetailsService;
-        this.authenticationTokenFilter = authenticationTokenFilter;
+        this.authenticationTokenFilterGateway = authenticationTokenFilterGateway;
     }
 
     @Bean
@@ -85,7 +85,7 @@ public abstract class AbstractWebSecurity extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         //adicionando o filtro de segurança
-        http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authenticationTokenFilterGateway, UsernamePasswordAuthenticationFilter.class);
 
         //desabilitando controle de cache
         http.headers().cacheControl();

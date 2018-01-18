@@ -1,6 +1,6 @@
 package br.com.springbasicsecurity.zuul.gateway.service.config;
 
-import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilter;
+import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilterGateway;
 import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;
 import br.com.springbasicsecurity.infra.component.util.JwtTokenUtil;
 import br.com.springbasicsecurity.infra.repository.UserRepository;
@@ -18,20 +18,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
+ * Configurações dos beans necessários para segurança do gateway
  * @author Joel Rodrigues Moreira on 16/01/18.
  * @project spring-cloud
  */
 @Configuration
-public class WebSecurityConfiguration {
+public class WebSecurityConfig {
 
     @Bean
     @Autowired
-    public AuthenticationTokenFilter createAuthenticationTokenFilter(
+    public AuthenticationTokenFilterGateway createAuthenticationTokenFilter(
             final UserDetailsService detailsService,
             final JwtTokenUtil tokenUtil,
             @Value("${springboot.security.jwt.controller.tokenHeader}") final String tokenHeader,
             final CacheUserAuthenticationService cacheAuth) {
-        return new AuthenticationTokenFilter(detailsService, tokenUtil, tokenHeader, cacheAuth);
+        return new AuthenticationTokenFilterGateway(detailsService, tokenUtil, tokenHeader, cacheAuth);
     }
 
     @Bean

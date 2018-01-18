@@ -23,7 +23,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  * @author Joel Rodrigues Moreira on 12/01/18.
  * @project spring-cloud
  */
-public class AuthenticationTokenFilter extends OncePerRequestFilter {
+public class AuthenticationTokenFilterGateway extends OncePerRequestFilter {
 
     protected final UserDetailsService userDetailsService;
     protected final JwtTokenUtil tokenUtil;
@@ -31,7 +31,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
     protected final CacheUserAuthenticationService cacheAuth;
 
     @Autowired
-    public AuthenticationTokenFilter(
+    public AuthenticationTokenFilterGateway(
             final UserDetailsService userDetailsService,
             final JwtTokenUtil tokenUtil,
             @Value("${springboot.security.jwt.controller.tokenHeader}") final String tokenHeader,

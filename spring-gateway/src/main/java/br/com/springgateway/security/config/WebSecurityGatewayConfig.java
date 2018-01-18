@@ -1,7 +1,7 @@
 package br.com.springgateway.security.config;
 
-import br.com.springbasicsecurity.zuul.gateway.AbstractWebSecurity;
-import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilter;
+import br.com.springbasicsecurity.zuul.gateway.AbstractWebSecurityGateway;
+import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilterGateway;
 import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,17 +19,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends AbstractWebSecurity {
+public class WebSecurityGatewayConfig extends AbstractWebSecurityGateway {
 
     @Autowired
-    public WebSecurityConfig(
+    public WebSecurityGatewayConfig(
             @Value("${springboot.security.jwt.controller.loginEndPoint}") final String loginEndPoint,
             @Value("${springboot.security.jwt.controller.refreshEndPoint}") final String refreshTokenEndPoin,
             @Value("${springboot.security.jwt.controller.createEndPoint}") final String createEndPoint,
             final UnauthorizedHandler unauthorizedHandler,
             final UserDetailsService userDetailsService,
-            final AuthenticationTokenFilter authenticationTokenFilter) {
-        super(loginEndPoint, refreshTokenEndPoin, createEndPoint, unauthorizedHandler, userDetailsService, authenticationTokenFilter);
+            final AuthenticationTokenFilterGateway authenticationTokenFilterGateway) {
+        super(loginEndPoint, refreshTokenEndPoin, createEndPoint, unauthorizedHandler, userDetailsService, authenticationTokenFilterGateway);
     }
 
     @Override

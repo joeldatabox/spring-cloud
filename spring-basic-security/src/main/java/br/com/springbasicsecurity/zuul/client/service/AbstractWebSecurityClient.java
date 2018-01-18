@@ -1,19 +1,15 @@
-package br.com.springpessoa.security;
+package br.com.springbasicsecurity.zuul.client.service;
 
-import br.com.springbasicsecurity.infra.service.CacheUserAuthenticationService;
-import br.com.springbasicsecurity.infra.service.impl.CacheUserAuthenticationServiceImpl;
-import br.com.springredis.service.RedisService;
+import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilterClient;
+import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -21,16 +17,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * Created by joel on 26/03/17.
  */
-/*@SuppressWarnings("SpringJavaAutowiringInspection")
+@SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)*/
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class AbstractWebSecurityClient extends WebSecurityConfigurerAdapter {
+    private final UnauthorizedHandler unauthorizedHandler;
+    private final AuthenticationTokenFilterClient authenticationTokenFilterClient;
 
     @Autowired
-    private UnauthorizedHandler unauthorizedHandler;
-    @Autowired
-    private AuthenticationTokenFilter authenticationTokenFilter;
+    public AbstractWebSecurityClient(final UnauthorizedHandler unauthorizedHandler, final AuthenticationTokenFilterClient authenticationTokenFilterClient) {
+        this.unauthorizedHandler = unauthorizedHandler;
+        this.authenticationTokenFilterClient = authenticationTokenFilterClient;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -68,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         //adicionando o filtro de segurança
-        http.addFilterBefore(this.authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(this.authenticationTokenFilterClient, UsernamePasswordAuthenticationFilter.class);
 
         //desabilitando controle de cache
         http.headers().cacheControl();
