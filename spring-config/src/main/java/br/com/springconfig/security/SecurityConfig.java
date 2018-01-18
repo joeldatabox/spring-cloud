@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * Configuração de segurança do ambiente
+ *
  * @author Joel Rodrigues Moreira on 28/12/17.
  * @project bug
  */

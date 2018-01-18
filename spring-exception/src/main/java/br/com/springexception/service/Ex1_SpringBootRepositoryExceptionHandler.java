@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * A classe começa com o nome Ex1_ por conta de precedencia de exceptions do Spring
+ *
  * @author Joel Rodrigues Moreira on 14/01/18.
  * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
  * @project spring-cloud

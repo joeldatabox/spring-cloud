@@ -16,6 +16,7 @@ import javax.validation.ConstraintViolationException;
 
 /**
  * A classe começa com o nome Ex3_ por conta de precedencia de exceptions do Spring
+ *
  * @author Joel Rodrigues Moreira on 14/01/18.
  * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
  * @project spring-cloud

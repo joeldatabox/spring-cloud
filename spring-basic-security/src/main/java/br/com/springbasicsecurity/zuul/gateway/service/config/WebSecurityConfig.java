@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * Configurações dos beans necessários para segurança do gateway
+ *
  * @author Joel Rodrigues Moreira on 16/01/18.
  * @project spring-cloud
  */

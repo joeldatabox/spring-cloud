@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * RestController responsavel por despachar novas requisições de token
+ *
  * @author Joel Rodrigues Moreira on 14/01/18.
  * e-mail: <a href="mailto:joel.databox@gmail.com">joel.databox@gmail.com</a>
  * @project spring-cloud
