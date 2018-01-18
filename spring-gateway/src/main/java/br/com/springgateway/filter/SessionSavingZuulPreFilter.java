@@ -2,16 +2,19 @@ package br.com.springgateway.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Component
 public class SessionSavingZuulPreFilter extends ZuulFilter {
 
-    private static final Log log = LogFactory.getLog(SessionSavingZuulPreFilter.class);
+    // private static final Log log = LogFactory.getLog(SessionSavingZuulPreFilter.class);
+    private final String tokenHeader;
 
-    public SessionSavingZuulPreFilter() {
+    public SessionSavingZuulPreFilter(@Value("${springboot.security.jwt.controller.tokenHeader}") final String tokenHeader) {
+        this.tokenHeader = tokenHeader;
     }
 
     @Override
@@ -21,13 +24,12 @@ public class SessionSavingZuulPreFilter extends ZuulFilter {
 
     @Override
     public Object run() {
-        RequestContext context = RequestContext.getCurrentContext();
-        //HttpSession httpSession = context.getRequest().getSession();
-        //Session session = repository.getSession(httpSession.getId());
-        final String token = context.getRequest().getHeader("Authentication");
-        context.addZuulRequestHeader("Authentication", token);
-
-        log.info("ZuulPreFilter token proxy: {} " + token);
+        RequestContext
+                .getCurrentContext()
+                .addZuulRequestHeader(
+                        this.tokenHeader, (
+                                (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()
+                        ).getRequest().getHeader(this.tokenHeader));
         return null;
     }
 

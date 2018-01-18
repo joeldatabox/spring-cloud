@@ -1,4 +1,4 @@
-package br.com.springmongoconfig.infra;
+package br.com.springmongoconfig.service.infra;
 
 public enum Operators {
     GTE(".$gte"),

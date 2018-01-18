@@ -1,4 +1,4 @@
-package br.com.springmongoconfig.infra;
+package br.com.springmongoconfig.service.infra;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;

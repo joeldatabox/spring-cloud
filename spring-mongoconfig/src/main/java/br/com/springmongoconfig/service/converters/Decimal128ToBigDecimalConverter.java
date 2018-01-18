@@ -1,4 +1,4 @@
-package br.com.springmongoconfig.converters;
+package br.com.springmongoconfig.service.converters;
 
 /**
  * Created by master on 16/06/17.

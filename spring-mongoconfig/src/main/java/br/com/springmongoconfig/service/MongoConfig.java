@@ -1,7 +1,7 @@
-package br.com.springmongoconfig;
+package br.com.springmongoconfig.service;
 
-import br.com.springmongoconfig.converters.BigDecimalToDecimal128Converter;
-import br.com.springmongoconfig.converters.Decimal128ToBigDecimalConverter;
+import br.com.springmongoconfig.service.converters.BigDecimalToDecimal128Converter;
+import br.com.springmongoconfig.service.converters.Decimal128ToBigDecimalConverter;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
@@ -25,7 +25,7 @@ import static java.util.Collections.singletonList;
  * @project demo
  */
 @Configuration
-public class DemoMongoConfig extends AbstractMongoConfiguration {
+public class MongoConfig extends AbstractMongoConfiguration {
     private final CustomConversions converters;
 
     protected final String dataBaseName;
@@ -34,11 +34,11 @@ public class DemoMongoConfig extends AbstractMongoConfiguration {
     protected final String userName;
     protected final String password;
 
-    public DemoMongoConfig(@Value("${spring.data.mongodb.database}") final String dataBaseName,
-                           @Value("${spring.data.mongodb.host}") final String hostDataBase,
-                           @Value("${spring.data.mongodb.port}") final String portDataBase,
-                           @Value("${spring.data.mongodb.username}") final String userName,
-                           @Value("${spring.data.mongodb.password}") final String password) {
+    public MongoConfig(@Value("${spring.data.mongodb.database}") final String dataBaseName,
+                       @Value("${spring.data.mongodb.host}") final String hostDataBase,
+                       @Value("${spring.data.mongodb.port}") final String portDataBase,
+                       @Value("${spring.data.mongodb.username}") final String userName,
+                       @Value("${spring.data.mongodb.password}") final String password) {
 
         this.dataBaseName = dataBaseName;
         this.hostDataBase = hostDataBase;
