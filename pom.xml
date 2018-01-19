@@ -29,6 +29,7 @@
         <module>spring-model</module>
         <module>spring-pessoa</module>
         <module>spring-exception</module>
+        <module>spring-rest-util</module>
     </modules>
 
     <properties>
