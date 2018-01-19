@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 //Packages onde existem entidades
 @EntityScan(basePackages = {"br.com.springmodel"})
 //Packages onde existem repositórios
-@EnableMongoRepositories(basePackages = {"br.com.springbasicsecurity.infra.repository"})
+//@EnableMongoRepositories(basePackages = {"br.com.springbasicsecurity.infra.repository"})
 //Packages onde existem componentes, serviços e configurações
 @ComponentScan(basePackages = {
         //Injeções internas do projeto
@@ -25,7 +25,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
         //Configurações de exceptions
         "br.com.springexception.service",
         //Configurações do  serviço do mongo
-        "br.com.springmongoconfig.service"
+        //"br.com.springmongoconfig.service"
 })
 @EnableZuulProxy
 @EnableEurekaClient

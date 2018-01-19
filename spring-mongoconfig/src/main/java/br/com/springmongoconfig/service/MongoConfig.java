@@ -7,7 +7,6 @@ import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.support.MongoRepositoryFactory;
@@ -19,12 +18,19 @@ import static com.mongodb.MongoCredential.createCredential;
 import static java.util.Collections.singletonList;
 
 /**
- * Realiza a configuração do mongo db
+ * Classe de configuração de conexão do mongodb<br/>
+ * <p><b> Para realizar a configuração de conexão com o MongoDB, siga o exemplo abaixao</b></p>
+ * <ul>
+ * <li>Após herdar a classe, torne-a uma classe de configuração com @{@link org.springframework.context.annotation.Configuration}</li>
+ * <li>Adicione a anotação @{@link org.springframework.data.mongodb.repository.config.EnableMongoRepositories} e informe onde fica os devidos repositórios em <b>basePackages</b> e também se vier ao caso a classe base em <b>repositoryBaseClass</b> </li>
+ * <li>A classe base padrão a ser utilizada é {@link br.com.springmongoconfig.service.repository.impl.CustomMongoRepositoryImpl}</li>
+ * </ul>
  *
  * @author Joel Rodrigues Moreira on 10/01/18.
  * @project demo
  */
-@Configuration
+//@Configuration
+//@EnableMongoRepositories(basePackages = "br.com", repositoryBaseClass = CustomMongoRepositoryImpl.class)
 public class MongoConfig extends AbstractMongoConfiguration {
     private final CustomConversions converters;
 
