@@ -28,6 +28,7 @@
         <module>spring-mongoconfig</module>
         <module>spring-model</module>
         <module>spring-pessoa</module>
+        <module>spring-endereco</module>
         <module>spring-exception</module>
         <module>spring-rest-util</module>
     </modules>
