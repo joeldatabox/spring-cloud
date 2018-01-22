@@ -1,4 +1,4 @@
-package br.com.springgateway.filter;
+package br.com.springgateway.zuulfilter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
