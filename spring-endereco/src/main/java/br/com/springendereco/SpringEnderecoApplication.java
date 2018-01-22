@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 		"br.com.springexception.service"
 })
 @EnableEurekaClient
+@EnableFeignClients
 public class SpringEnderecoApplication {
 
 	public static void main(String[] args) {

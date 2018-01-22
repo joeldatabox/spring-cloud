@@ -25,7 +25,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 })
 @EnableZuulProxy
 @EnableEurekaClient
-@EnableFeignClients
 public class SpringGatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringGatewayApplication.class, args);

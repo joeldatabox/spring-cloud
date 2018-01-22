@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Joel Rodrigues Moreira on 10/01/18.
@@ -26,17 +27,19 @@ import java.util.Map;
 @RequestMapping("/api/pessoas")
 public class PessoaController {
     private final PessoaService service;
+    private final EnderecoClient enderecoClient;
 
     @Autowired
-    public PessoaController(final PessoaService service) {
+    public PessoaController(final PessoaService service, final EnderecoClient enderecoClient) {
         this.service = service;
+        this.enderecoClient = enderecoClient;
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public Pessoa save(@Valid @RequestBody Pessoa model, HttpServletResponse response) {
-        final Pessoa p =service.save(model);
-        response.addHeader("Location","http://localhost:8083/demo-pessoaservice/api/pessoas/"+p.getId());
+        final Pessoa p = service.save(model);
+        response.addHeader("Location", "http://localhost:8083/demo-pessoaservice/api/pessoas/" + p.getId());
         return p;
     }
 
@@ -50,7 +53,12 @@ public class PessoaController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity findAll(@RequestParam Map<String, Object> allRequestParams, HttpServletResponse response) {
         System.out.println("findall");
-        response.addHeader("testando","TEste");
-        return ResponseEntity.ok(service.findAll(allRequestParams));
+        response.addHeader("testando", "TEste");
+        return ResponseEntity.ok(
+                service.findAll(allRequestParams)
+                        .stream()
+                        .map(p -> p.setEndereco(this.enderecoClient.getEnderecoById(p.getId())))
+                        .collect(Collectors.toList())
+        );
     }
 }
