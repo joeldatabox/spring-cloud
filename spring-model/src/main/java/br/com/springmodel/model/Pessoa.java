@@ -16,9 +16,6 @@ import java.util.Objects;
  * @project demo
  */
 @Document(collection = "pessoas")
-@CompoundIndexes({
-        @CompoundIndex(name = "sync_index_unique", def = "{'sync' : 1}", unique = true)
-})
 public class Pessoa implements Serializable {
 
     @Id

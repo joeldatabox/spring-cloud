@@ -10,12 +10,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 //Packages onde existem entidades
 @EntityScan(basePackages = {"br.com.springmodel"})
-//Packages onde existem repositórios
-//@EnableMongoRepositories(basePackages = {"br.com.springpessoa.repository"})
 @ComponentScan(basePackages = {
         "br.com.springpessoa",
         "br.com.springredis.service",
-        //"br.com.springmongoconfig.service",
         "br.com.springbasicsecurity.zuul.client.service",
         "br.com.springexception.service"
 })

@@ -35,7 +35,9 @@ public class PessoaController {
     @RequestMapping(method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public Pessoa save(@Valid @RequestBody Pessoa model, HttpServletResponse response) {
-        return service.save(model);
+        final Pessoa p =service.save(model);
+        response.addHeader("Location","http://localhost:8083/demo-pessoaservice/api/pessoas/"+p.getId());
+        return p;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -46,8 +48,9 @@ public class PessoaController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity findAll(@RequestParam Map<String, Object> allRequestParams) {
+    public ResponseEntity findAll(@RequestParam Map<String, Object> allRequestParams, HttpServletResponse response) {
         System.out.println("findall");
+        response.addHeader("testando","TEste");
         return ResponseEntity.ok(service.findAll(allRequestParams));
     }
 }
