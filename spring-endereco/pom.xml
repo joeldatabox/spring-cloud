@@ -16,16 +16,52 @@
 
     <dependencies>
         <dependency>
+            <groupId>br.com</groupId>
+            <artifactId>spring-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>br.com</groupId>
+            <artifactId>spring-mongoconfig</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>br.com</groupId>
+            <artifactId>spring-basic-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>br.com</groupId>
+            <artifactId>spring-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>br.com</groupId>
+            <artifactId>spring-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>

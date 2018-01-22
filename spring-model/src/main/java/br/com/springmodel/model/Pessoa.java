@@ -28,6 +28,7 @@ public class Pessoa implements Serializable {
     @Indexed
     private String cpfCnpj;
     private Date dtCadastro;
+    private Endereco endereco;
 
     public Pessoa() {
     }
@@ -74,6 +75,15 @@ public class Pessoa implements Serializable {
 
     public Pessoa setDtCadastro(final Date dtCadastro) {
         this.dtCadastro = dtCadastro;
+        return this;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public Pessoa setEndereco(final Endereco endereco) {
+        this.endereco = endereco;
         return this;
     }
 
