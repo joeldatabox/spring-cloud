@@ -1,5 +1,6 @@
 package br.com.springbasicsecurity.infra.service;
 
+import br.com.springbasicsecurity.infra.response.JwtTokenResponse;
 import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.model.Passwd;
 import br.com.springmodel.security.model.User;
@@ -29,6 +30,8 @@ public interface UserService {
     Authentication getCurrentAuthentication();
 
     JwtUser getCurrentJwtUser();
+
+    JwtTokenResponse getCurrentToken();
 
     User getCurrentUser();
 }

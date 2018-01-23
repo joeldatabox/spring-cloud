@@ -2,6 +2,7 @@ package br.com.springbasicsecurity.infra.service.impl;
 
 
 import br.com.springbasicsecurity.infra.repository.UserRepository;
+import br.com.springbasicsecurity.infra.response.JwtTokenResponse;
 import br.com.springbasicsecurity.infra.service.UserService;
 import br.com.springexception.throwables.security.SpringBootSecurityBadRequestException;
 import br.com.springexception.throwables.security.SpringBootSecurityConflictException;
@@ -10,9 +11,12 @@ import br.com.springmodel.security.jwt.JwtUser;
 import br.com.springmodel.security.model.Passwd;
 import br.com.springmodel.security.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Collection;
 import java.util.List;
@@ -25,10 +29,12 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
+    private final String tokenHeader;
 
     @Autowired
-    public UserServiceImpl(final UserRepository repository) {
+    public UserServiceImpl(final UserRepository repository, @Value("${springboot.security.jwt.controller.tokenHeader}") final String tokenHeader) {
         this.repository = repository;
+        this.tokenHeader = tokenHeader;
     }
 
     @Override
@@ -86,6 +92,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public JwtUser getCurrentJwtUser() {
         return (JwtUser) getCurrentAuthentication().getPrincipal();
+    }
+
+    @Override
+    public JwtTokenResponse getCurrentToken() {
+        return new JwtTokenResponse(
+                ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                        .getRequest()
+                        .getHeader(this.tokenHeader)
+        );
     }
 
     @Override

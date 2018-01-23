@@ -3,8 +3,11 @@ package br.com.springbasicsecurity.zuul.client.service.config;
 import br.com.springbasicsecurity.infra.component.AuthenticationTokenFilterClient;
 import br.com.springbasicsecurity.infra.component.UnauthorizedHandler;
 import br.com.springbasicsecurity.infra.component.util.JwtTokenUtil;
+import br.com.springbasicsecurity.infra.repository.UserRepository;
 import br.com.springbasicsecurity.infra.service.CacheUserAuthenticationService;
+import br.com.springbasicsecurity.infra.service.UserService;
 import br.com.springbasicsecurity.infra.service.impl.CacheUserAuthenticationServiceImpl;
+import br.com.springbasicsecurity.infra.service.impl.UserServiceImpl;
 import br.com.springmodel.security.service.SecretService;
 import br.com.springredis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +53,12 @@ public class WebSecurityConfig {
     @Bean
     public SecretService createSecretService() {
         return new SecretService();
+    }
+
+    @Bean
+    @Autowired
+    public UserService createUserService(final UserRepository repository, @Value("${springboot.security.jwt.controller.tokenHeader}") final String tokenHeader) {
+        return new UserServiceImpl(repository, tokenHeader);
     }
 
 }

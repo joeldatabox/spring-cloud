@@ -66,7 +66,7 @@ public class WebSecurityConfig {
 
     @Bean
     @Autowired
-    public UserService createUserService(final UserRepository repository) {
-        return new UserServiceImpl(repository);
+    public UserService createUserService(final UserRepository repository, @Value("${springboot.security.jwt.controller.tokenHeader}") final String tokenHeader) {
+        return new UserServiceImpl(repository, tokenHeader);
     }
 }
