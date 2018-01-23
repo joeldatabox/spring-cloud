@@ -12,7 +12,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  * @project demo
  */
 @Configuration
-@EnableMongoRepositories(basePackages = "br.com.springendereco", repositoryBaseClass = CustomMongoRepositoryImpl.class)
+@EnableMongoRepositories(basePackages = {
+        "br.com.springbasicsecurity.infra.repository",
+        "br.com.springendereco"
+}, repositoryBaseClass = CustomMongoRepositoryImpl.class)
 public class MongoConfig extends br.com.springmongoconfig.service.MongoConfig {
 
     public MongoConfig(@Value("${spring.data.mongodb.database}") final String dataBaseName,
