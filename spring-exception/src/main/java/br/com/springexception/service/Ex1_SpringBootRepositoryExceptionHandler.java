@@ -26,7 +26,7 @@ public class Ex1_SpringBootRepositoryExceptionHandler {
         this.errorMessageBuilder = errorMessageBuilder;
     }
 
-    @ExceptionHandler(value = SpringBootException.class)
+    @ExceptionHandler(SpringBootRepositoryException.class)
     public ResponseEntity SpringBootException(final SpringBootRepositoryException ex) {
         return errorMessageBuilder.build(ex).toResponseEntity();
     }

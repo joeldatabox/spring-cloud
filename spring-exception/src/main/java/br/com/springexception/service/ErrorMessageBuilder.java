@@ -32,7 +32,7 @@ public class ErrorMessageBuilder {
 
     private ErrorMessage message;
 
-    @Value("${springboot.print.stackTrace:false}")
+    @Value("${springboot.print.stackTrace:true}")
     private boolean STACK_TRACE;
 
     @Value("${springboot.print.responseException:false}")

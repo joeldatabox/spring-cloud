@@ -1,5 +1,6 @@
 package br.com.springendereco.controller;
 
+import br.com.springexception.throwables.SpringBootBadRequestException;
 import br.com.springmodel.model.Endereco;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,6 +30,8 @@ public class EnderecoController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity findAll(@PathVariable("id") String id, @RequestParam Map<String, Object> allRequestParams, HttpServletResponse response) {
         log.info("respondendo requisicao na porta " + port);
-        return ResponseEntity.ok(new Endereco(id, "Endereco " + id));
+
+        //return ResponseEntity.ok(new Endereco(id, "Endereco " + id +" porta: "+port));
+        throw new SpringBootBadRequestException(Endereco.class, "bar", "TEste de exceptions");
     }
 }

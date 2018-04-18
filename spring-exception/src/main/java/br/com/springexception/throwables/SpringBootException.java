@@ -1,5 +1,7 @@
 package br.com.springexception.throwables;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashMap;
@@ -16,7 +18,7 @@ public class SpringBootException extends RuntimeException {
     protected final HttpStatus status;
     protected final String message;
     protected String objectName;
-    protected final Map<String, Object> details = new HashMap<>();
+    protected Map<String, Object> details = new HashMap<>();
 
     public SpringBootException() {
         this.status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -38,6 +40,19 @@ public class SpringBootException extends RuntimeException {
             this.details.put(this.objectName + "." + field, info);
         }
     }
+
+    @JsonCreator
+    public SpringBootException(
+            @JsonProperty final HttpStatus status,
+            @JsonProperty final String message,
+            @JsonProperty final String objectName,
+            @JsonProperty final Map<String, Object> details) {
+        this.status = status;
+        this.message = message;
+        this.objectName = objectName;
+        this.details = details;
+    }
+
 
     public SpringBootException(final String message) {
         this(message, HttpStatus.INTERNAL_SERVER_ERROR);
